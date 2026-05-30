@@ -46,6 +46,7 @@ const AIPage = React.lazy(() => import("./pages/aipage"));
 const ContributorDashboard = React.lazy(() => import("./pages/ContributorDashboard"));
 const BecomeMentor = React.lazy(() => import("./pages/BecomeMentor"));
 const Portfolio = React.lazy(() => import("./pages/Portfolio"));
+const AuthCallback = React.lazy(() => import("./pages/AuthCallback"));
 const PublicPortfolio = React.lazy(() => import("./pages/PublicPortfolio"));
 const ResourceHub = React.lazy(() => import("@/pages/ResourceHub"));
 const StudyRooms = React.lazy(() => import("./components/StudyRooms"));
@@ -124,6 +125,8 @@ function AppContent() {
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/become-mentor" element={<BecomeMentor />} />
           <Route path="/portfolio/:slug" element={<PublicPortfolio />} />
+
+          <Route path="/auth/callback" element={<AuthCallback />} />
 
           <Route
             path="/dashboard"
