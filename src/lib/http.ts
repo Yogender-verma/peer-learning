@@ -61,7 +61,7 @@ export function normalizeError(error: unknown, fallbackMessage = "Something went
       code: getString((error as Error & UnknownRecord).code),
       details: getString((error as Error & UnknownRecord).details),
       status: getNumber((error as Error & UnknownRecord).status),
-      cause: error.cause,
+      cause: (error as any).cause,
     };
   }
 
