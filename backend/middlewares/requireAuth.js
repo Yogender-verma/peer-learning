@@ -17,6 +17,18 @@ const verifyLocalJwt = (token, secret) => {
 
     const [headerB64, payloadB64, signatureB64] = parts;
 
+    const header = JSON.parse(base64UrlDecode(headerB64));
+    
+    // Prevent algorithm confusion: Only process HS256 tokens using HMAC.
+    if (header.alg !== "HS256") {
+      return null;
+    }
+    
+    // Additional check: if the secret appears to be a PEM-encoded public key, reject HMAC
+    if (secret.startsWith("-----BEGIN")) {
+      return null;
+    }
+
     const expectedSignature = crypto
       .createHmac("sha256", secret)
       .update(`${headerB64}.${payloadB64}`)
