@@ -174,9 +174,10 @@ export const getSupabaseDiscover = async (req, res) => {
       .range(skip, skip + limit - 1);
 
     if (search.trim()) {
-      const safeSearch = search.trim().replace(/[",()]/g, '');
+      const safeSearch = search.trim().replace(/[^\w\s-]/g, "");
       if (safeSearch) {
-        query = query.or(`name.ilike."%${safeSearch}%",skills.ilike."%${safeSearch}%"`);
+        const pattern = `%${safeSearch.replace(/['"]/g, "")}%`;
+        query = query.or(`name.ilike."${pattern}",skills.ilike."${pattern}"`);
       }
     }
 
