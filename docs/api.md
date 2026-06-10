@@ -108,7 +108,7 @@ Dequeues up to 100 pending push notifications (`push_sent_at IS NULL`, oldest fi
 
 ### `POST /api/cron/reminders`
 
-Inserts `session_reminder` notifications for all sessions with `status = 'scheduled'` whose `start_time` falls within the next 14–16 minutes. Idempotent via `upsert` on `(user_id, entity_id, type)`.
+Inserts `session_reminder` notifications for all sessions with `status = 'upcoming'` whose `start_time` falls within the next 14–16 minutes. Idempotent via `upsert` on `(user_id, entity_id, type)`.
 
 **Auth:** `Authorization: Bearer <CRON_SECRET>`
 
